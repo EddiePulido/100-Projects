@@ -62,8 +62,9 @@ const ProjectPage = () => {
                 <strong>Tech Stack:</strong> {project.techStack}
               </p>
               <p className="card-text">
-                <strong>Creator's Discord Name (Message me if you're interested in joining!):</strong> {project.discordUsername}
+                <strong>Creator's Discord Name (Message me if you're interested in working together!):</strong> 
               </p>
+              <p>{project.discordUsername}</p>
               <button className="btn btn-secondary mt-3" onClick={() => navigate('/')}>
                 Back to Projects
               </button>
