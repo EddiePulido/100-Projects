@@ -54,7 +54,7 @@ const ProjectPage = () => {
               />
             )}
             <div className="card-body">
-              <h2 className="card-title fw-bold mb-3">{project.projectName}</h2> {/* Larger title */}
+              <h2 className="card-title fw-bold mb-3">{project.projectName}</h2> 
               <p className="card-text">
                 <strong>Description:</strong> {project.projectDescription}
               </p>
@@ -62,9 +62,8 @@ const ProjectPage = () => {
                 <strong>Tech Stack:</strong> {project.techStack}
               </p>
               <p className="card-text">
-                <strong>Creator:</strong> {project.discordUsername}
+                <strong>Creator's Discord Name (Message me if you're interested in joining!):</strong> {project.discordUsername}
               </p>
-              {/* Optional: Add a "Back to Projects" button */}
               <button className="btn btn-secondary mt-3" onClick={() => navigate('/')}>
                 Back to Projects
               </button>

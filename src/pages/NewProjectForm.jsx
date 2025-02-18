@@ -71,7 +71,7 @@ const NewProjectForm = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="techStack" className="form-label">Tech Stack you project will use:</label>
+                  <label htmlFor="techStack" className="form-label">Tech Stack your project will use:</label>
                   <input
                     type="text"
                     className="form-control"
@@ -83,7 +83,7 @@ const NewProjectForm = () => {
                 </div>
 
                 <div className="mb-3">
-                  <label htmlFor="discordUsername" className="form-label">Discord Username (with #):</label>
+                  <label htmlFor="discordUsername" className="form-label">Discord Username:</label>
                   <input
                     type="text"
                     className="form-control"
