@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import db from '../appwrite/databases';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../utils/AuthContext';
 
 const NewProjectForm = () => {
   const navigate = useNavigate();
+  const { user } = useAuth()
+
   const [formData, setFormData] = useState({
     projectName: '',
     projectDescription: '',
@@ -26,7 +29,8 @@ const NewProjectForm = () => {
     setSubmitting(true);
 
     try {
-      const res = await db.projects.create(formData);
+
+      const res = await db.projects.create({...formData, userId: user.$id});
       navigate(`/projects/${res.$id}`);
     } catch (err) {
       console.error(err);

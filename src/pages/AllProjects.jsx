@@ -24,7 +24,8 @@ const AllProjects = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-4">Project Board</h1>
+
+      <h2 className="text-center mb-4">Project Board</h2>
       <div className="row">
         {loading ? (
           <div className="text-center">Loading...</div>

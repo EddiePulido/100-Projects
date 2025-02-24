@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import db from '../appwrite/databases';
+import { useAuth } from '../utils/AuthContext';
 
 const ProjectPage = () => {
   const { id } = useParams();
@@ -9,6 +10,8 @@ const ProjectPage = () => {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const { user } = useAuth()
 
   const getProjectData = async () => {
     setLoading(true);
@@ -24,27 +27,39 @@ const ProjectPage = () => {
     }
   };
 
+  const handleDelete = async () => {
+    if(window.confirm(`Delete ${project.projectName}?`)){
+      try{
+        await db.projects.delete(id)
+        navigate('/projects')
+      }catch(err){
+        console.error(err)
+      }
+
+    }
+  }
+
   useEffect(() => {
     getProjectData();
   }, [id, navigate]);
 
   if (loading) {
-    return <div className="text-center py-5">Loading...</div>; // Center loading message
+    return <div className="text-center py-5">Loading...</div>; 
   }
 
   if (error) {
-    return <div className="text-center text-danger py-5">{error}</div>; // Center error message
+    return <div className="text-center text-danger py-5">{error}</div>; 
   }
 
   if (!project) {
-    return <div className="text-center py-5">Project not found.</div>; // Center "not found" message
+    return <div className="text-center py-5">Project not found.</div>; 
   }
 
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-8">
-          <div className="card shadow border-0"> {/* Shadow and no border */}
+          <div className="card shadow border-0"> 
             {project.imageUrl && ( // Optional image
               <img
                 src={project.imageUrl}
@@ -65,9 +80,16 @@ const ProjectPage = () => {
                 <strong>Creator's Discord Name (Message me if you're interested in working together!):</strong> 
               </p>
               <p>{project.discordUsername}</p>
-              <button className="btn btn-secondary mt-3" onClick={() => navigate('/')}>
+              <button className="btn btn-primary mt-3" onClick={() => navigate('/')}>
                 Back to Projects
               </button>
+              {user.$id === project.userId ? (
+                <button className="btn btn-danger mt-3 ml-3" onClick={handleDelete}>
+                  Delete
+                </button>
+              ) : (
+                ''
+              )}
             </div>
           </div>
         </div>
